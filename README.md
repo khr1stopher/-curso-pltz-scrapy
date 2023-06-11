@@ -132,3 +132,12 @@ miracle.”', '“The person, be it gentleman or lady, who has not pleasure in a
 >>> request.body
 [<all the html>]
 ```
+
+## Estructura de carpetas Scrapy
+
+- pipelines.py: permite modificar los datos desde que entran al spider (scripts que extraen información) hasta el final.
+- middlewares.py: trabaja con un concepto denominado señales: controla eventos que suceden entre los requests y la captura de información.
+- items.py: transforma los datos que se reciben del requests.
+- _ init _.py: define que todos los archivos en la carpeta son un módulo de python.
+- Folder spiders: en donde se crearan los scripts.
+- settings.py: archivo con configuraciones del uso de Scrapy.
