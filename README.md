@@ -64,3 +64,19 @@ scrapy version
 ```
 
 and now is done
+
+### Windows
+1. create a virtual enviroument
+```bash
+py -m venv venv
+alias activate-entorno=source <path>/venv/Scripts/activate
+> activate-entorno
+```
+2. install scrapy and autopep8
+```bash
+pip3 install autopep8 scrapy
+```
+3. verificar que se intallo scrapy
+```bash
+scrapy version
+```
