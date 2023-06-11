@@ -141,3 +141,7 @@ miracle.”', '“The person, be it gentleman or lady, who has not pleasure in a
 - _ init _.py: define que todos los archivos en la carpeta son un módulo de python.
 - Folder spiders: en donde se crearan los scripts.
 - settings.py: archivo con configuraciones del uso de Scrapy.
+
+## Que es spiders?
+
+Spider es una clase de python a la cual le decimos que informacion queremos, que informacion no queremos y como guardar esa informacion.
