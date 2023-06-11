@@ -97,3 +97,38 @@ scrapy crawl <spider-name>
 ## Generadores e iteradores
 note: `cuando no entiendas como funciona algo o siemplemente no encuentras la forma de que ese concepto pueda servirte busca ejemplos de aplicacion del mismo`
 [When to use yield instead of return in Python?](https://www.geeksforgeeks.org/use-yield-keyword-instead-return-keyword-python/)
+
+## Scrapy Shell
+
+```bash
+scrapy shell "http://quotes.toscrape.com"
+
+>>> response
+<200 http://quotes.toscrape.com>
+
+>>> response.xpath('//h1/a/text()') 
+[<Selector query='//h1/a/text()' data='Quotes to Scrape'>]
+
+>>> response.xpath('//h1/a/text()').get()
+'Quotes to Scrape'
+
+>>> response.xpath('//span[@class="text" and @itemprop="text"]/text()') 
+[<Selector query='//span[@class="text" and @itemprop="text"]/text()' data='“The world as we have created it is a...'>, <Selector query='//span[@class="text" and @itemprop="text"]/text()' data='“It is our choices, Harry, that show ...'>, <Selector query='//span[@class="text" and @itemprop="text"]/text()' data='“There are only two ways to live your...'>, <Selector query='//span[@class="text" and @itemprop="text"]/text()' data='“The person, be it gentleman or lady,...'>, <Selector query='//span[@class="text" and @itemprop="text"]/text()' data='“Imperfection is beauty, madness is g...'>, <Selector query='//span[@class="text" and @itemprop="text"]/text()' data='“Try not to become a man of success. ...'>, <Selector query='//span[@class="text" and @itemprop="text"]/text()' data='“It is better to be hated for what yo...'>, <Selector query='//span[@class="text" and @itemprop="text"]/text()' data="“I have not failed. I've just found 1...">, <Selector query='//span[@class="text" and @itemprop="text"]/text()' data='“A woman is like a tea bag; you never...'>, <Selector query='//span[@class="text" and @itemprop="text"]/text()' data='“A day without sunshine is like, you ...'>]
+
+>>> response.xpath('//span[@class="text" and @itemprop="text"]/text()').getall()
+['“The world as we have created it is a process of our thinking. It cannot be changed without changing our thinking.”', '“It is our choices, Harry, that show what we 
+truly are, far more than our abilities.”', '“There are only two ways to live your life. One is as though nothing is a miracle. The other is as though everything is a 
+miracle.”', '“The person, be it gentleman or lady, who has not pleasure in a good novel, must be intolerably stupid.”', "“Imperfection is beauty, madness is genius and it's better to be absolutely ridiculous than absolutely boring.”", '“Try not to become a man of success. Rather become a man of value.”', '“It is better to be hated for what you are than to be loved for what you are not.”', "“I have not failed. I've just found 10,000 ways that won't work.”", "“A woman is like a tea bag; you never know how strong it is until it's in hot water.”", '“A day without sunshine is like, you know, night.”']
+
+>>> request.encoding  
+'utf-8'
+
+>>> request.method  
+'GET'
+
+>>> request.headers
+{b'Accept': [b'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'], b'Accept-Language': [b'en'], b'User-Agent': [b'Scrapy/2.9.0 (+https://scrapy.org)'], b'Accept-Encoding': [b'gzip, deflate']}
+
+>>> request.body
+[<all the html>]
+```
