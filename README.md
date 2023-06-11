@@ -80,3 +80,16 @@ pip3 install autopep8 scrapy
 ```bash
 scrapy version
 ```
+
+## Create a project with scrapy
+
+```bash
+scrapy startproject <name-project>
+cd <name-project>
+```
+
+run the spider
+
+```bash
+scrapy crawl <spider-name>
+```
