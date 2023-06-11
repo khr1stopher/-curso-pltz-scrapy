@@ -93,3 +93,7 @@ run the spider
 ```bash
 scrapy crawl <spider-name>
 ```
+
+## Generadores e iteradores
+note: `cuando no entiendas como funciona algo o siemplemente no encuentras la forma de que ese concepto pueda servirte busca ejemplos de aplicacion del mismo`
+[When to use yield instead of return in Python?](https://www.geeksforgeeks.org/use-yield-keyword-instead-return-keyword-python/)
