@@ -25,6 +25,14 @@ class QuotesSpider(scrapy.Spider):
                     },
                 },
             },
+            'CONCURRENT_REQUETS': 24,
+            'MEMUSAGE_LIMIT_MB': 2048,
+            'MEMUSAGE_NOTIFY_MAIL': [
+                'kkromans009@gmail.com'
+            ],
+            'ROBOTSTXT_OBEY': True,
+            'USER_AGENT': 'Khristopher',
+            'FEED_EXPORT_ENCODING': 'utf-8'
         }
     def parse_only_quotes(self, response, **kwargs):
         if kwargs:
