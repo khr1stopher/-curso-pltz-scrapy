@@ -145,3 +145,11 @@ miracle.”', '“The person, be it gentleman or lady, who has not pleasure in a
 ## Que es spiders?
 
 Spider es una clase de python a la cual le decimos que informacion queremos, que informacion no queremos y como guardar esa informacion.
+
+## Send arguments to the spider
+
+-a indica que se le pasaran argumentos al spider
+
+```bash
+scrapy crawl quotes -a top=5
+```
