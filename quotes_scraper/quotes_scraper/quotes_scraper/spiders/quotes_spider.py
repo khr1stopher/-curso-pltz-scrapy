@@ -13,9 +13,19 @@ class QuotesSpider(scrapy.Spider):
     ]
 
     custom_settings = {
-        'FEED_URI': 'quotes.json',
-        'FEED_FORMAT': 'json'
-    }
+            'FEEDS': {
+                'quotes.json': {
+                    'format': 'json',
+                    'encoding': 'utf8',
+                    'store_empty': False,
+                    'fields': None,
+                    'indent': 4,
+                    'item_export_kwargs': {
+                        'export_empty_fields': True,
+                    },
+                },
+            },
+        }
 
     def parse(self, response, **kwargs):
         title = response.xpath('//h1/a/text()').get()
