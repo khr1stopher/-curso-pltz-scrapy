@@ -26,6 +26,19 @@ class QuotesSpider(scrapy.Spider):
                 },
             },
         }
+    def parse_only_quotes(self, response, **kwargs):
+        if kwargs:
+            quotes = kwargs['quotes']
+        quotes.extend(response.xpath('//span[@class="text" and @itemprop="text"]/text()').getall())
+
+        
+        next_btn = response.xpath('//ul[@class="pager"]/li[@class="next"]/a/@href').get()
+        if next_btn:
+            yield response.follow(next_btn, callback=self.parse_only_quotes, cb_kwargs={'quotes': quotes})
+        else:
+            yield {
+                'quotes': quotes
+            }
 
     def parse(self, response, **kwargs):
         title = response.xpath('//h1/a/text()').get()
@@ -33,10 +46,9 @@ class QuotesSpider(scrapy.Spider):
         top_ten_tags = response.xpath('//div[contains(@class, "tags-box")]//span[@class="tag-item"]/a/text()').getall()
         yield {
             "Title": title,
-            "quotes": quotes,
             "top_ten_tags": top_ten_tags
         }
 
         next_btn = response.xpath('//ul[@class="pager"]/li[@class="next"]/a/@href').get()
         if next_btn:
-            yield response.follow(next_btn, callback=self.parse)
+            yield response.follow(next_btn, callback=self.parse_only_quotes, cb_kwargs={'quotes': quotes})
