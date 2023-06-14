@@ -37,20 +37,24 @@ class QuotesSpider(scrapy.Spider):
     def parse_only_quotes(self, response, **kwargs):
         if kwargs:
             quotes = kwargs['quotes']
+            authors = kwargs['authors']
         quotes.extend(response.xpath('//span[@class="text" and @itemprop="text"]/text()').getall())
+        authors.extend(response.xpath('//span/small[@class="author" and @itemprop="author"]/text()').getall())
 
         
         next_btn = response.xpath('//ul[@class="pager"]/li[@class="next"]/a/@href').get()
         if next_btn:
-            yield response.follow(next_btn, callback=self.parse_only_quotes, cb_kwargs={'quotes': quotes})
+            yield response.follow(next_btn, callback=self.parse_only_quotes, cb_kwargs={'quotes': quotes, 'authors': authors})
         else:
             yield {
-                'quotes': quotes
+                'quotes': quotes,
+                'authors': authors
             }
 
     def parse(self, response, **kwargs):
         title = response.xpath('//h1/a/text()').get()
         quotes = response.xpath('//span[@class="text" and @itemprop="text"]/text()').getall()
+        authors = response.xpath('//span/small[@class="author" and @itemprop="author"]/text()').getall()
         top_tags = response.xpath('//div[contains(@class, "tags-box")]//span[@class="tag-item"]/a/text()').getall()
 
         top = getattr(self, 'top', None)
@@ -65,4 +69,4 @@ class QuotesSpider(scrapy.Spider):
 
         next_btn = response.xpath('//ul[@class="pager"]/li[@class="next"]/a/@href').get()
         if next_btn:
-            yield response.follow(next_btn, callback=self.parse_only_quotes, cb_kwargs={'quotes': quotes})
+            yield response.follow(next_btn, callback=self.parse_only_quotes, cb_kwargs={'quotes': quotes, 'authors': authors})
